@@ -69,3 +69,39 @@ console.log(c);
 var d=10;
 --d;
 console.log(d);
+
+console.log("assignment operators-->");
+function equal(a){
+  console.log("the value of a = "+a);
+}
+equal(8)
+
+function assadd(a){
+  a+=5;
+  console.log("the value of a = "+a);
+}
+assadd(2)
+
+function asssub(a){
+  a-=5;
+  console.log("the value of a = "+a);
+}
+asssub(3)
+
+function assmul(a){
+  a*=5;
+  console.log("the value of a = "+a);
+}
+assmul(3)
+
+function assdiv(a){
+  a/=5;
+  console.log("the value of a = "+a);
+}
+assdiv(3)
+
+function assmdl(a){
+  a%=5;
+  console.log("the value of a = "+a);
+}
+assmdl(3)
