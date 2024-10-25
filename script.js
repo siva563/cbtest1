@@ -26,34 +26,33 @@ var y = 20;
     console.log(z);
  }
  cool(2,5);*/
-   var x=5;
-   var y=2;
+console.log("Arithmatic operations-->")
  function add(a,b){
-   console.log("the addition of a and b="+(a+b));
+   console.log("addition of a and b ="+(a+b));
    }
  add(2,3);
 
  function sub(a,b){
-   console.log("the subtraction of a and b="+(a-b));
+   console.log("subtraction of a and b ="+(a-b));
  }
  sub(10,5);
 
  function mul(a,b){
-   console.log("the multiplication of a and b="+(a*b));
+   console.log("multiplication of a and b ="+(a*b));
  }
  mul(10,5);
 
  function div(a,b){
-   console.log("the division of a and b="+(a/b));
+   console.log("division of a and b ="+(a/b));
  }
  div(10,5);
 
  function modulus(a,b){
-   console.log("the modulus of a and b="+(a%b));
+   console.log("modulus of a and b ="+(a%b));
  }
- modulus(3,1);
+ modulus(10,3);
 
- console.log("hello ->")
+ console.log("increment and decrement-->")
 
 var a=4;
 a++;
@@ -70,6 +69,3 @@ console.log(c);
 var d=10;
 --d;
 console.log(d);
-
-
-
