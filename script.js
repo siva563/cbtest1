@@ -154,24 +154,87 @@
 //     console.log(seconds);
  
 
-console.log("Question no 5:");
+// console.log("Question no 5:");
 
-function isprime(n){
-    if(n <= 1)return false;
-    if(n <= 3)return true;
-    if(n % 2 === 0 ||  n % 3 === 0 ) return false;
-    for(var i = 2 ; i<=n; i++ ){
-        if(n % i === 0 || n % (i+2) === 0){
-            return false;
+// function isprime(n){
+//     if(n <= 1)return false;
+//     if(n <= 3)return true;
+//     if(n % 2 === 0 ||  n % 3 === 0 ) return false;
+//     for(var i = 2 ; i<=n; i++ ){
+//         if(n % i === 0 || n % (i+2) === 0){
+//             return false;
+//         }
+//         return true;
+//     }
+// }
+// var number = 2;
+// if(isprime(number)){
+//     console.log(number+'is a prime number');
+// } else{
+//     console.log(number+'is not a prime number');
+// }
+
+
+// for (var i=0; i <mydata.products.length; i++){
+
+//     var rtr=mydata.products[i].reviews;
+//     for (var k=0; k< rtr.length;k++){
+//         if (rtr[k].rating==4){
+//        console.log(rtr[k].comment)
+//     }
+//     }
+// }
+
+// for(var i=0; i< mydata.products.length; i++){
+//     if(i<=mydata.products[i].category == "beauty"){
+//          console.log(mydata.products[i].title);
+//     }
+// }
+
+function display(){
+    console.log("disssssplay");
+    var firstName= document.getElementById("demo").value;
+    console.log(firstName);
+
+    var lastName= document.getElementById("demo1").value;
+    console.log(lastName);
+
+    var mobile= document.getElementById("demo2").value;
+    console.log(mobile);
+
+    var email= document.getElementById("demo3").value;
+    console.log(email);
+
+    var selectedValue;
+    var names = document.getElementsByName("Gender");
+    for(var i =0 ; i < names.length;i++){
+        if(names[i].checked){
+            selectedValue=names[i].value;
         }
-        return true;
     }
-}
-var number = 2;
-if(isprime(number)){
-    console.log(number+'is a prime number');
-} else{
-    console.log(number+'is not a prime number');
-}
 
+    console.log(selectedValue);
+
+    var qualification= document.getElementById("demo6").value;
+    console.log(qualification);
+
+    var degreepercentage= document.getElementById("demo7").value;
+    console.log(degreepercentage);
+
+    var address= document.getElementById("demo8").value;
+    console.log(address);
+    var address= document.getElementById("demo9").value;
+    console.log(address);
+    var address= document.getElementById("demo10").value;
+    console.log(address);
+
+    var select;
+    var hobbs=document.getElementsByName("Hobbies");
+    for(var i=0; i<hobbs.length;i++){
+        if(hobbs[i].checked){
+            select=hobbs[i].value
+        }
+    }
+    console.log(select);
+}
 
