@@ -140,16 +140,17 @@ increment(3);
 }
 calculateAge(25,2002);
 */
-function getData(){
+/*function getData(){
     var sharuk = document.getElementById("sharuk").value;
     var basha = document.getElementById("basha").value;
     var  mail=document.getElementById("mail").value;
     var PhoneNumber=document.getElementById("PhoneNumber").value;
     var Date=document.getElementById("Date").value;
     var pin=document.getElementById("pin").value;
-    var country=document.getElementById("country");
-    var state=document.getElementById("state");
-    var dist=document.getElementById("Dist");
+    var country=document.getElementById("country").value;
+    var state=document.getElementById("state").value;
+    var dist=document.getElementById("Dist").value;
+    var Gender=document.getElementById("gender").value;
     console.log("FirstName= "+ sharuk );
     console.log("LastName= "+  basha );
     console.log("mail= "+ mail );
@@ -159,4 +160,32 @@ function getData(){
     console.log("country= "+ country );
     console.log("stateName= "+ state);
     console.log("DistName= "+ dist );
+    console.log("Gender "+gender);
+
 }
+*/
+var _td= document.createElement("td");
+_td.innerHTML="cell1";
+_td.style.border= "1px solid black";
+var _tr = document.createElement("tr");
+_tr.appendChild(_td);
+var _table = document.createElement("table");
+_table.appendChild(_tr);
+_table.style.border= "1px solid black";
+_table.style.borderCollapse="collapse";
+var mydiv=document.getElementById('sharuk');
+mydiv.appendChild(_table);
+var _td1= document.createElement("td");
+_td1.innerHTML="cell2";
+_td1.style.border= "1px solid black";
+var _tr1 = document.createElement("tr");
+_tr1.appendChild(_td1);
+_table.appendChild(_tr1);
+var _td2= document.createElement("td");
+_td2.innerHTML="cell3";
+_td2.style.border= "1px solid black";
+_tr.appendChild(_td2);
+var _td3= document.createElement("td");
+_td3.innerHTML="cell4";
+_td3.style.border= "1px solid black";
+_tr1.appendChild(_td3);
