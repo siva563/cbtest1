@@ -191,50 +191,84 @@
 //     }
 // }
 
-function display(){
-    console.log("disssssplay");
-    var firstName= document.getElementById("demo").value;
-    console.log(firstName);
+// function display(){
+//     console.log("disssssplay");
+//     var firstName= document.getElementById("demo").value;
+//     console.log(firstName);
 
-    var lastName= document.getElementById("demo1").value;
-    console.log(lastName);
+//     var lastName= document.getElementById("demo1").value;
+//     console.log(lastName);
 
-    var mobile= document.getElementById("demo2").value;
-    console.log(mobile);
+//     var mobile= document.getElementById("demo2").value;
+//     console.log(mobile);
 
-    var email= document.getElementById("demo3").value;
-    console.log(email);
+//     var email= document.getElementById("demo3").value;
+//     console.log(email);
 
-    var selectedValue;
-    var names = document.getElementsByName("Gender");
-    for(var i =0 ; i < names.length;i++){
-        if(names[i].checked){
-            selectedValue=names[i].value;
-        }
-    }
+//     var selectedValue;
+//     var names = document.getElementsByName("Gender");
+//     for(var i =0 ; i < names.length;i++){
+//         if(names[i].checked){
+//             selectedValue=names[i].value;
+//         }
+//     }
 
-    console.log(selectedValue);
+//     console.log(selectedValue);
 
-    var qualification= document.getElementById("demo6").value;
-    console.log(qualification);
+//     var qualification= document.getElementById("demo6").value;
+//     console.log(qualification);
 
-    var degreepercentage= document.getElementById("demo7").value;
-    console.log(degreepercentage);
+//     var degreepercentage= document.getElementById("demo7").value;
+//     console.log(degreepercentage);
 
-    var address= document.getElementById("demo8").value;
-    console.log(address);
-    var address= document.getElementById("demo9").value;
-    console.log(address);
-    var address= document.getElementById("demo10").value;
-    console.log(address);
+//     var address= document.getElementById("demo8").value;
+//     console.log(address);
+//     var address= document.getElementById("demo9").value;
+//     console.log(address);
+//     var address= document.getElementById("demo10").value;
+//     console.log(address);
 
-    var select;
-    var hobbs=document.getElementsByName("Hobbies");
-    for(var i=0; i<hobbs.length;i++){
-        if(hobbs[i].checked){
-            select=hobbs[i].value
-        }
-    }
-    console.log(select);
-}
+//     var select;
+//     var hobbs=document.getElementsByName("Hobbies");
+//     for(var i=0; i<hobbs.length;i++){
+//         if(hobbs[i].checked){
+//             select=hobbs[i].value
+//         }
+//     }
+//     console.log(select);
+// }
+
+var _td=document.createElement("td");
+     _td.innerHTML="cell1 ";
+var _td2=document.createElement("td");
+     _td2.innerHTML="cell2";
+var _td3=document.createElement("td");
+     _td3.innerHTML="cell3 ";
+var _tr=document.createElement("tr");
+     _tr.appendChild(_td);
+     _tr.style.border="1px solid black";
+     _tr.appendChild(_td2);
+     _tr.appendChild(_td3);
+var _table=document.createElement("table");
+     _table.appendChild(_tr);
+     _table.style.border="1px solid black"
+mydiv=document.getElementById('chandu');
+mydiv.appendChild(_table);
+
+var _td=document.createElement("td");
+     _td.innerHTML="cell4 ";
+var _td2=document.createElement("td");
+     _td2.innerHTML="cell5";
+var _td3=document.createElement("td");
+     _td3.innerHTML="cell6 ";
+var _tr=document.createElement("tr");
+     _tr.appendChild(_td);
+     _tr.appendChild(_td2);
+     _tr.appendChild(_td3);
+var _table=document.createElement("table");
+     _table.appendChild(_tr);
+      _table.style.border="1px solid black"
+mydiv=document.getElementById('chandu');
+mydiv.appendChild(_table);
+
 
