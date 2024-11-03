@@ -191,84 +191,249 @@
 //     }
 // }
 
-// function display(){
-//     console.log("disssssplay");
-//     var firstName= document.getElementById("demo").value;
-//     console.log(firstName);
+//  function display(){
+//      var firstName= document.getElementById("demo").value;
+//      console.log(firstName);
 
-//     var lastName= document.getElementById("demo1").value;
-//     console.log(lastName);
+//      var lastName= document.getElementById("demo1").value;
+//      console.log(lastName);
 
-//     var mobile= document.getElementById("demo2").value;
-//     console.log(mobile);
+//      var mobile= document.getElementById("demo2").value;
+//      console.log(mobile);
 
-//     var email= document.getElementById("demo3").value;
-//     console.log(email);
+//      var email= document.getElementById("demo3").value;
+//      console.log(email);
 
-//     var selectedValue;
-//     var names = document.getElementsByName("Gender");
-//     for(var i =0 ; i < names.length;i++){
-//         if(names[i].checked){
-//             selectedValue=names[i].value;
-//         }
-//     }
+//      var selectedValue;
+//      var names = document.getElementsByName("Gender");
+//      for(var i =0 ; i < names.length;i++){
+//          if(names[i].checked){
+//              selectedValue=names[i].value;
+//          }
+//      }
 
-//     console.log(selectedValue);
-
+//      console.log(selectedValue);
 //     var qualification= document.getElementById("demo6").value;
-//     console.log(qualification);
+//      console.log(qualification);
 
-//     var degreepercentage= document.getElementById("demo7").value;
-//     console.log(degreepercentage);
+//      var degreepercentage= document.getElementById("demo7").value;
+//      console.log(degreepercentage);
 
-//     var address= document.getElementById("demo8").value;
-//     console.log(address);
-//     var address= document.getElementById("demo9").value;
-//     console.log(address);
-//     var address= document.getElementById("demo10").value;
-//     console.log(address);
-
+//      var address= document.getElementById("demo8").value;
+//      console.log(address);
+//      var address= document.getElementById("demo9").value;
+//      console.log(address);
+//      var address= document.getElementById("demo10").value;
+//      console.log(address);
 //     var select;
-//     var hobbs=document.getElementsByName("Hobbies");
-//     for(var i=0; i<hobbs.length;i++){
-//         if(hobbs[i].checked){
-//             select=hobbs[i].value
-//         }
-//     }
-//     console.log(select);
+//      var hobbs=document.getElementsByName("Hobbies");
+//      for(var i=0; i<hobbs.length;i++){
+//          if(hobbs[i].checked){
+//              select=hobbs[i].value
+//          }
+//      }
+//      console.log(select);
+
+//  }
+
+//  function reset(){
+//      document.getElementById("demo2").remove();
+     
 // }
 
-var _td=document.createElement("td");
-     _td.innerHTML="cell1 ";
-var _td2=document.createElement("td");
-     _td2.innerHTML="cell2";
-var _td3=document.createElement("td");
-     _td3.innerHTML="cell3 ";
-var _tr=document.createElement("tr");
-     _tr.appendChild(_td);
-     _tr.style.border="1px solid black";
-     _tr.appendChild(_td2);
-     _tr.appendChild(_td3);
-var _table=document.createElement("table");
-     _table.appendChild(_tr);
-     _table.style.border="1px solid black"
-mydiv=document.getElementById('chandu');
-mydiv.appendChild(_table);
+// var _td=document.createElement("td");
+//      _td.innerHTML="cell1 ";
+// var _td2=document.createElement("td");
+//      _td2.innerHTML="cell2";
+// var _td3=document.createElement("td");
+//      _td3.innerHTML="cell3 ";
+// var _tr=document.createElement("tr");
+//      _tr.appendChild(_td);
+//      _tr.style.border="1px solid black";
+//      _tr.appendChild(_td2);
+//      _tr.appendChild(_td3);
+// var _table=document.createElement("table");
+//      _table.appendChild(_tr);
+//      _table.style.border="1px solid black"
+// mydiv=document.getElementById('chandu');
+// mydiv.appendChild(_table);
 
-var _td=document.createElement("td");
-     _td.innerHTML="cell4 ";
-var _td2=document.createElement("td");
-     _td2.innerHTML="cell5";
-var _td3=document.createElement("td");
-     _td3.innerHTML="cell6 ";
-var _tr=document.createElement("tr");
-     _tr.appendChild(_td);
-     _tr.appendChild(_td2);
-     _tr.appendChild(_td3);
-var _table=document.createElement("table");
-     _table.appendChild(_tr);
-      _table.style.border="1px solid black"
-mydiv=document.getElementById('chandu');
-mydiv.appendChild(_table);
+// var _td=document.createElement("td");
+//      _td.innerHTML="cell4 ";
+// var _td2=document.createElement("td");
+//      _td2.innerHTML="cell5";
+// var _td3=document.createElement("td");
+//      _td3.innerHTML="cell6 ";
+// var _tr=document.createElement("tr");
+//      _tr.appendChild(_td);
+//      _tr.appendChild(_td2);
+//      _tr.appendChild(_td3);
+// var _table=document.createElement("table");
+//      _table.appendChild(_tr);
+//       _table.style.border="1px solid black"
+// mydiv=document.getElementById('chandu');
+// mydiv.appendChild(_table);
 
 
+let editIndex = -1;
+
+function createForm() {
+    // Create the form
+    const form = document.createElement("form");
+
+    // First Name
+    const fnameLabel = document.createElement("label");
+    fnameLabel.textContent = "First Name: ";
+    const fnameInput = document.createElement("input");
+    fnameInput.setAttribute("type", "text");
+    fnameInput.setAttribute("id", "firstName");
+
+    // Last Name
+    const lnameLabel = document.createElement("label");
+    lnameLabel.textContent = "Last Name: ";
+    const lnameInput = document.createElement("input");
+    lnameInput.setAttribute("type", "text");
+    lnameInput.setAttribute("id", "lastName");
+
+    // Gender
+    const genderLabel = document.createElement("label");
+    genderLabel.textContent = "Gender: ";
+    const genderInput = document.createElement("select");
+    genderInput.setAttribute("id", "gender");
+    ["Male", "Female", "Other"].forEach(optionText => {
+        const option = document.createElement("option");
+        option.value = optionText;
+        option.textContent = optionText;
+        genderInput.appendChild(option);
+    });
+
+    // Email
+    const emailLabel = document.createElement("label");
+    emailLabel.textContent = "Email: ";
+    const emailInput = document.createElement("input");
+    emailInput.setAttribute("type", "email");
+    emailInput.setAttribute("id", "email");
+
+    // Hobbies
+    const hobbiesLabel = document.createElement("label");
+    hobbiesLabel.textContent = "Hobbies: ";
+    const hobbiesInput = document.createElement("input");
+    hobbiesInput.setAttribute("type", "text");
+    hobbiesInput.setAttribute("id", "hobbies");
+
+    // Buttons
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save";
+    saveButton.setAttribute("type", "button");
+    saveButton.onclick = saveData;
+
+    const clearButton = document.createElement("button");
+    clearButton.textContent = "Clear";
+    clearButton.setAttribute("type", "button");
+    clearButton.onclick = clearForm;
+
+    // Append elements to the form
+    form.append(fnameLabel, fnameInput, document.createElement("br"));
+    form.append(lnameLabel, lnameInput, document.createElement("br"));
+    form.append(genderLabel, genderInput, document.createElement("br"));
+    form.append(emailLabel, emailInput, document.createElement("br"));
+    form.append(hobbiesLabel, hobbiesInput, document.createElement("br"));
+    form.append(saveButton, clearButton);
+
+    document.getElementById("form-container").appendChild(form);
+}
+
+function saveData() {
+    // Get form values
+    const firstName = document.getElementById("firstName").value;
+    const lastName = document.getElementById("lastName").value;
+    const gender = document.getElementById("gender").value;
+    const email = document.getElementById("email").value;
+    const hobbies = document.getElementById("hobbies").value;
+
+    if (editIndex === -1) {
+        addRow(firstName, lastName, gender, email, hobbies);
+    } else {
+        updateRow(editIndex, firstName, lastName, gender, email, hobbies);
+        editIndex = -1;
+    }
+    clearForm();
+}
+
+function addRow(firstName, lastName, gender, email, hobbies) {
+    const table = document.getElementById("data-table") || createTable();
+
+    const row = table.insertRow();
+    row.insertCell(0).textContent = firstName;
+    row.insertCell(1).textContent = lastName;
+    row.insertCell(2).textContent = gender;
+    row.insertCell(3).textContent = email;
+    row.insertCell(4).textContent = hobbies;
+
+    const editCell = row.insertCell(5);
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.onclick = () => editRow(row.rowIndex - 1);
+    editCell.appendChild(editButton);
+
+    const deleteCell = row.insertCell(6);
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.onclick = () => deleteRow(row.rowIndex - 1);
+    deleteCell.appendChild(deleteButton);
+}
+
+function createTable() {
+    const table = document.createElement("table");
+    table.setAttribute("id", "data-table");
+    
+    const headerRow = table.insertRow();
+    ["First Name", "Last Name", "Gender", "Email", "Hobbies", "Edit", "Delete"].forEach(headerText => {
+        const cell = headerRow.insertCell();
+        cell.textContent = headerText;
+    });
+    
+    document.getElementById("table-container").appendChild(table);
+    return table;
+}
+
+function editRow(index) {
+    const table = document.getElementById("data-table");
+    const row = table.rows[index + 1];  // Adjust for header row
+
+    document.getElementById("firstName").value = row.cells[0].textContent;
+    document.getElementById("lastName").value = row.cells[1].textContent;
+    document.getElementById("gender").value = row.cells[2].textContent;
+    document.getElementById("email").value = row.cells[3].textContent;
+    document.getElementById("hobbies").value = row.cells[4].textContent;
+
+    editIndex = index;
+}
+
+function updateRow(index, firstName, lastName, gender, email, hobbies) {
+    const table = document.getElementById("data-table");
+    const row = table.rows[index + 1];  // Adjust for header row
+
+    row.cells[0].textContent = firstName;
+    row.cells[1].textContent = lastName;
+    row.cells[2].textContent = gender;
+    row.cells[3].textContent = email;
+    row.cells[4].textContent = hobbies;
+}
+
+function deleteRow(index) {
+    const table = document.getElementById("data-table");
+    table.deleteRow(index + 1);  // Adjust for header row
+}
+
+function clearForm() {
+    document.getElementById("firstName").value = "";
+    document.getElementById("lastName").value = "";
+    document.getElementById("gender").value = "Male";
+    document.getElementById("email").value = "";
+    document.getElementById("hobbies").value = "";
+    editIndex = -1;
+}
+
+// Initialize the form on page load
+createForm();
