@@ -274,7 +274,6 @@
 // mydiv=document.getElementById('chandu');
 // mydiv.appendChild(_table);
 
-
 let editIndex = -1;
 
 function createForm() {
@@ -287,6 +286,7 @@ function createForm() {
     const fnameInput = document.createElement("input");
     fnameInput.setAttribute("type", "text");
     fnameInput.setAttribute("id", "firstName");
+    fnameInput.setAttribute("placeholder","enter your name");
 
     // Last Name
     const lnameLabel = document.createElement("label");
@@ -437,3 +437,4 @@ function clearForm() {
 
 // Initialize the form on page load
 createForm();
+    
