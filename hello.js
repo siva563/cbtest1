@@ -1,0 +1,25 @@
+var form=document.createElement('form');
+form.setAttribute('Id' ,'User');
+var FirstNameLabel=document.createElement('label');
+FirstNameLabel.textContent='Firstname';
+var FirstNameInput=document.createElement('input');
+FirstNameInput.setAttribute('type' , 'text');
+FirstNameInput.setAttribute('name', 'Firstname');
+FirstNameLabel.appendChild(FirstNameInput);
+form.appendChild(FirstNameLabel);
+var LastNameLabel=document.createElement('label');
+LastNameLabel.textContent='LastName';
+var LastNameInput=document.createElement('input');
+LastNameInput.setAttribute('type','text');
+LastNameInput.setAttribute('name','LastName');
+LastNameLabel.appendChild(LastNameInput);
+form.appendChild(LastNameLabel);
+var EmailLabel=document.createElement('label');
+EmailLabel.textContent='Email';
+var EmailInput=document.createElement('input');
+EmailInput.setAttribute('type','Email');
+EmailInput.setAttribute('name','Email');
+EmailLabel.appendChild(EmailInput);
+form.appendChild(EmailLabel);
+
+document.body.appendChild(form);
