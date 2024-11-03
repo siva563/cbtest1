@@ -65,4 +65,4 @@ submitButton.setAttribute('type', 'submit');
 form.appendChild(submitButton);
 
 // Append the form to the body
-document.body.appendChild(form);
+document.body.appendChild(form);    

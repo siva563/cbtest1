@@ -7,7 +7,6 @@ FirstNameInput.setAttribute('type' , 'text');
 FirstNameInput.setAttribute('name', 'Firstname');
 FirstNameLabel.appendChild(FirstNameInput);
 form.appendChild(FirstNameLabel);
-
 var LastNameLabel=document.createElement('label');
 LastNameLabel.textContent='LastName';
 var LastNameInput=document.createElement('input');
@@ -15,7 +14,6 @@ LastNameInput.setAttribute('type','text');
 LastNameInput.setAttribute('name','LastName');
 LastNameLabel.appendChild(LastNameInput);
 form.appendChild(LastNameLabel);
-
 var EmailLabel=document.createElement('label');
 EmailLabel.textContent='Email';
 var EmailInput=document.createElement('input');
@@ -23,7 +21,6 @@ EmailInput.setAttribute('type','Email');
 EmailInput.setAttribute('name','Email');
 EmailLabel.appendChild(EmailInput);
 form.appendChild(EmailLabel);
-
 var HobbiesLabel=document.createElement('label');
 HobbiesLabel.textContent='Hobbies';
 var HobbiesInput=document.createElement('input');
@@ -31,7 +28,6 @@ HobbiesInput.setAttribute('type','Hobbies');
 HobbiesInput.setAttribute('name','Hobbies');
 HobbiesLabel.appendChild(HobbiesInput);
 form.appendChild(HobbiesLabel);
-
 var GenderLabel=document.createElement('Label');
 GenderLabel.textContent='Gender';
 var GenderSelect=document.createElement('select');
@@ -50,15 +46,25 @@ GenderSelect.appendChild(FemaleOption);
 GenderSelect.appendChild(OtherOption);
 GenderLabel.appendChild(GenderSelect);
 form.appendChild(GenderLabel);
-
 var submitButton=document.createElement('button');
 submitButton.textContent=('SUBMIT');
 submitButton.setAttribute('type','submit');
 form.appendChild(submitButton);
-
 var clearButton=document.createElement('button');
 clearButton.textContent='clear';
 clearButton.setAttribute('type','clear');
 form.appendChild(clearButton);
-
 document.body.appendChild(form);
+submitButton.addEventListener('click' ,function(event){
+    event.preventDefault();
+    var FirstName =FirstNameInput.value;
+    var LastName =LastNameInput.value;
+    var Email= EmailInput.value;
+    var Hobbies=HobbiesInput.value;
+    var Gender=GenderSelect.value;
+    console.log('form Data: ',{ FirstName,LastName,Email,Hobbies,Gender});
+    alert('Form Submitted:\nFirst Name: ${firstname} \nLastName: ${LastName}\nEmail: ${Email}\nHobbies: ${Hobbies}\nGender: ${Gender}');
+});
+clearButton.addEventListener('click' ,function(){
+    form.reset();
+})
