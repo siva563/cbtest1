@@ -24,7 +24,7 @@ form.appendChild(EmailLabel);
 var HobbiesLabel=document.createElement('label');
 HobbiesLabel.textContent='Hobbies';
 var HobbiesInput=document.createElement('input');
-HobbiesInput.setAttribute('type','Hobbies');
+HobbiesInput.setAttribute('type','text');
 HobbiesInput.setAttribute('name','Hobbies');
 HobbiesLabel.appendChild(HobbiesInput);
 form.appendChild(HobbiesLabel);
@@ -52,9 +52,20 @@ submitButton.setAttribute('type','submit');
 form.appendChild(submitButton);
 var clearButton=document.createElement('button');
 clearButton.textContent='clear';
-clearButton.setAttribute('type','clear');
+clearButton.setAttribute('type','button');
 form.appendChild(clearButton);
 document.body.appendChild(form);
+var table=document.createElement('table');
+table.setAttribute('border','1');
+var tableHeader='<tr>'+
+    '<th> FirstName</th>'+
+    '<th> LastName</th>'+
+    '<th> Email</th>'+
+    '<th> Hobbies</th>'+
+    '<th> Gender</th>'+
+'</tr>';
+table.innerHTML=tableHeader;
+document.body.appendChild(table);
 submitButton.addEventListener('click' ,function(event){
     event.preventDefault();
     var FirstName =FirstNameInput.value;
@@ -62,8 +73,19 @@ submitButton.addEventListener('click' ,function(event){
     var Email= EmailInput.value;
     var Hobbies=HobbiesInput.value;
     var Gender=GenderSelect.value;
-    console.log('form Data: ',{ FirstName,LastName,Email,Hobbies,Gender});
-    alert('Form Submitted:\nFirst Name: ${firstname} \nLastName: ${LastName}\nEmail: ${Email}\nHobbies: ${Hobbies}\nGender: ${Gender}');
+    alert(`form submitted:
+        FirstName: ${FirstName}
+        LastName: ${LastName}
+        Email: ${Email}
+        Hobbies: ${Hobbies}
+        Gender:${Gender}`);
+    var row=table.insertRow();
+    row.insertCell(0).textContent=FirstName;
+    row.insertCell(1).textContent=LastName;
+    row.insertCell(2).textContent=Email;
+    row.insertCell(3).textContent=Hobbies;
+    row.insertCell(4).textContent=Gender;
+    form.reset();
 });
 clearButton.addEventListener('click' ,function(){
     form.reset();
