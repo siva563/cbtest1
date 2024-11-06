@@ -1,48 +1,35 @@
-var formContainer =document.createElement('div');
-formContainer.setAttribute('style','border:2px solid #333;padding:20px;width:300px;margin:auto; box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1); border-radius: 8px;');
-
 var form=document.createElement('form');
 form.setAttribute('Id' ,'User');
-
 var FirstNameLabel=document.createElement('label');
 FirstNameLabel.textContent='Firstname';
-FirstNameLabel.setAttribute('style','display:block;margin-bottom:10px;');
 var FirstNameInput=document.createElement('input');
 FirstNameInput.setAttribute('type' , 'text');
 FirstNameInput.setAttribute('name', 'Firstname');
 FirstNameLabel.appendChild(FirstNameInput);
 form.appendChild(FirstNameLabel);
-
 var LastNameLabel=document.createElement('label');
 LastNameLabel.textContent='LastName';
-LastNameLabel.setAttribute('style','display:block;margin-bottom:10px;');
 var LastNameInput=document.createElement('input');
 LastNameInput.setAttribute('type','text');
 LastNameInput.setAttribute('name','LastName');
 LastNameLabel.appendChild(LastNameInput);
 form.appendChild(LastNameLabel);
-
 var EmailLabel=document.createElement('label');
-EmailLabel.textContent='Emailyour';
-EmailLabel.setAttribute('style','display:block;margin-bottom:10px;');
+EmailLabel.textContent='Email';
 var EmailInput=document.createElement('input');
 EmailInput.setAttribute('type','Email');
 EmailInput.setAttribute('name','Email');
 EmailLabel.appendChild(EmailInput);
 form.appendChild(EmailLabel);
-
 var HobbiesLabel=document.createElement('label');
-HobbiesLabel.textContent='Hobbiess:';
-HobbiesLabel.setAttribute('style','display:block;margin-bottom:10px;');
+HobbiesLabel.textContent='Hobbies';
 var HobbiesInput=document.createElement('input');
 HobbiesInput.setAttribute('type','text');
 HobbiesInput.setAttribute('name','Hobbies');
 HobbiesLabel.appendChild(HobbiesInput);
 form.appendChild(HobbiesLabel);
-
 var GenderLabel=document.createElement('Label');
 GenderLabel.textContent='Gender';
-GenderLabel.setAttribute('style','display:block;margin-bottom:10px;');
 var GenderSelect=document.createElement('select');
 GenderSelect.setAttribute('name','Gender');//
 var MaleOption=document.createElement('Option');
@@ -59,25 +46,17 @@ GenderSelect.appendChild(FemaleOption);
 GenderSelect.appendChild(OtherOption);
 GenderLabel.appendChild(GenderSelect);
 form.appendChild(GenderLabel);
-
 var submitButton=document.createElement('button');
 submitButton.textContent=('SUBMIT');
 submitButton.setAttribute('type','submit');
-submitButton.setAttribute('style','margin-top:10px;');
 form.appendChild(submitButton);
-
 var clearButton=document.createElement('button');
 clearButton.textContent='clear';
 clearButton.setAttribute('type','button');
-clearButton.setAttribute('style','margin-top;margin-left:10px;');
 form.appendChild(clearButton);
-
-formContainer.appendChild(form);
-document.body.appendChild(formContainer);
- 
+document.body.appendChild(form);
 var table=document.createElement('table');
 table.setAttribute('border','1');
-table.setAttribute('style', 'width: 100%; margin-top: 20px; display: none;');
 var tableHeader='<tr>'+
     '<th> FirstName</th>'+
     '<th> LastName</th>'+
@@ -87,7 +66,6 @@ var tableHeader='<tr>'+
 '</tr>';
 table.innerHTML=tableHeader;
 document.body.appendChild(table);
-
 submitButton.addEventListener('click' ,function(event){
     event.preventDefault();
     var FirstName =FirstNameInput.value;
@@ -95,11 +73,12 @@ submitButton.addEventListener('click' ,function(event){
     var Email= EmailInput.value;
     var Hobbies=HobbiesInput.value;
     var Gender=GenderSelect.value;
-    if(!FirstName || !LastName || !Email || !Hobbies || !Gender){
-        alert("Please fill in all feilds before submitting.");
-        return;
-    }
-    table.style.display='table';
+    alert(`form submitted:
+        FirstName: ${FirstName}
+        LastName: ${LastName}
+        Email: ${Email}
+        Hobbies: ${Hobbies}
+        Gender:${Gender}`);
     var row=table.insertRow();
     row.insertCell(0).textContent=FirstName;
     row.insertCell(1).textContent=LastName;
@@ -110,8 +89,4 @@ submitButton.addEventListener('click' ,function(event){
 });
 clearButton.addEventListener('click' ,function(){
     form.reset();
-    table.style.display='none';
-    while(table.rows.length>1){
-        table.deleteRow(1);
-    }
-});
+})
