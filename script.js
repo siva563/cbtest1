@@ -358,6 +358,7 @@ form.appendChild(clearButton);
 document.body.appendChild(form);
 
 var table = document.createElement("table");
+table.setAttribute("border","1")
 table.setAttribute("id","data-table")
 
 var headerRow = document.createElement("tr");
