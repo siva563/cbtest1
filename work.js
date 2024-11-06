@@ -99,13 +99,41 @@ submitButton.addEventListener('click' ,function(event){
         alert("Please fill in all feilds before submitting.");
         return;
     }
+
     table.style.display='table';
+
     var row=table.insertRow();
     row.insertCell(0).textContent=FirstName;
     row.insertCell(1).textContent=LastName;
     row.insertCell(2).textContent=Email;
     row.insertCell(3).textContent=Hobbies;
     row.insertCell(4).textContent=Gender;
+
+    var actionCell=row.insertCell(5);
+    var editButton = document.createElement('button');
+    editButton.textContent='Edit';
+    editButton.setAttribute('style','margin-right:10px');
+    editButton.addEventListener('click',function(){
+        FirstNameInput.value=row.cells[0].textContent;
+        LastNameInput.value=row.cells[1].textContent;
+        EmailInput.value=row.cells[2].textContent;
+        HobbiesInput.value=row.cells[2].textContent;
+        GenderSelect.value = row.cells[4].textContent;
+
+        table.deleteRow(row.rowIndex);
+    });
+    actionCell.appendChild(editButton);
+
+    var deleteButton=document.createElement('button');
+    deleteButton.textContent='delete';
+    deleteButton.addEventListener('click',function(){
+        table.deleteRow(row.rowIndex);
+        if(table.rows.length==1){
+            table.style.display='none';
+        }
+    });
+    actionCell.appendChild(deleteButton);
+
     form.reset();
 });
 clearButton.addEventListener('click' ,function(){
