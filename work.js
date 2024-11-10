@@ -41,7 +41,7 @@ HobbiesLabel.appendChild(HobbiesInput);
 form.appendChild(HobbiesLabel);
 
 var GenderLabel=document.createElement('Label');
-GenderLabel.textContent='Gender';
+GenderLabel.textContent='Gender:';
 GenderLabel.setAttribute('style','display:block;margin-bottom:10px;');
 var GenderSelect=document.createElement('select');
 GenderSelect.setAttribute('name','Gender');//
@@ -67,7 +67,7 @@ submitButton.setAttribute('style','margin-top:10px;');
 form.appendChild(submitButton);
 
 var clearButton=document.createElement('button');
-clearButton.textContent='clear';
+clearButton.textContent='CLEAR';
 clearButton.setAttribute('type','button');
 clearButton.setAttribute('style','margin-top;margin-left:10px;');
 form.appendChild(clearButton);
