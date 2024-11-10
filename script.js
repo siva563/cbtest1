@@ -105,6 +105,7 @@
 //   console.log("the value of a = "+a);
 // }
 // assmdl(3)
+
 // console.log("Question no 1:");
 // function sum(a,b){
 //   return a+b;
@@ -127,6 +128,7 @@
 // var num= 10;
 // var result=incrementbythree(num);
 // console.log("the result is "+result);
+
 // console.log("Question no 4:");
 // function age(birthyear){
 //     var currentYear = new Date();
@@ -274,175 +276,8 @@
 // mydiv=document.getElementById('chandu');
 // mydiv.appendChild(_table);
 
-var form = document.createElement('form');
-
-var fnameLabel = document.createElement('label');
-fnameLabel.textContent = 'firstName:';
-var fnameInput = document.createElement('input');
-fnameInput.setAttribute("type","text");
-fnameInput.setAttribute("name","firstName");
-fnameInput.setAttribute("id","firstName");
-form.appendChild(fnameLabel);
-form.appendChild(fnameInput);
-
-var lnameLabel = document.createElement('label');
-lnameLabel.textContent = 'lastName:';
-var lnameInput = document.createElement('input');
-lnameInput.setAttribute("type","text");
-lnameInput.setAttribute("name","lastName");
-lnameInput.setAttribute("id","lastName");
-form.appendChild(lnameLabel);
-form.appendChild(lnameInput);
+// 
 
 
-var Genderlabel = document.createElement('label');
-Genderlabel.textContent = 'Gender:';
-var genderselect = document.createElement("select");
-genderselect.setAttribute("name","Gender");
-genderselect.setAttribute("id","Gender");
-
-var optionMale = document.createElement("option");
-optionMale.value = "Male";
-optionMale.textContent = "Male";
-
-
-var optionFemale = document.createElement("option");
-optionFemale.value = "Female";
-optionFemale.textContent = "Female";
-
-var optionother = document.createElement("option");
-optionother.value = "other";
-optionother.textContent = "other";
-
-genderselect.appendChild(optionMale);
-genderselect.appendChild(optionFemale);
-genderselect.appendChild(optionother);
-
-form.appendChild(Genderlabel);
-form.appendChild(genderselect);
-
-var Email = document.createElement('label');
-Email.textContent = 'email:';
-var emailInput= document.createElement('input');
-emailInput.setAttribute("type","email");
-emailInput.setAttribute("name","Email");
-emailInput.setAttribute("id","Email");
-form.appendChild(Email);
-form.appendChild(emailInput);
-
-var HobbiesLabel = document.createElement('label');
-HobbiesLabel.textContent = 'Hobbies:';
-var HobbiesInput = document.createElement('input');
-HobbiesInput.setAttribute("type","text");
-HobbiesInput.setAttribute("name","Hobbies");
-HobbiesInput.setAttribute("id","Hobbies");
-form.appendChild(HobbiesLabel);
-form.appendChild(HobbiesInput);
-
-var saveButton = document.createElement("button");
-saveButton.textContent = "save";
-saveButton.setAttribute("type","button");
-saveButton.onclick = savedata;
-
-form.appendChild(saveButton);
-
-var clearButton = document.createElement("button");
-clearButton.textContent = "clear";
-clearButton.setAttribute("type","button");
-clearButton.onclick = function(){
-    form.reset();
-};
-
-form.appendChild(clearButton);
-
-document.body.appendChild(form);
-
-var table = document.createElement("table");
-table.setAttribute("border","1")
-table.setAttribute("id","data-table")
-
-var headerRow = document.createElement("tr");
-
-var th1 = document.createElement("th");
-th1.textContent = "firstName";
-headerRow.appendChild(th1);
-
-
-var th2 = document.createElement("th");
-th2.textContent = "lastName";
-headerRow.appendChild(th2);
-
-var th3 = document.createElement("th");
-th3.textContent = "Gender";
-headerRow.appendChild(th3);
-
-var th4 = document.createElement("th");
-th4.textContent = "Email";
-headerRow.appendChild(th4);
-
-var th5 = document.createElement("th");
-th5.textContent = "Hobbies";
-headerRow.appendChild(th5);
-
-table.appendChild(headerRow);
-document.body.appendChild(table);
-
-function savedata(){
-
-    var firstName = document.getElementById("firstName").value;
-    var lastName = document.getElementById("lastName").value;
-    var Gender = document.getElementById("Gender").value;
-    var Email = document.getElementById("Email").value;
-    var Hobbies = document.getElementById("Hobbies").value;
-
-    var Row = document.createElement("tr");
-
-    var firstNameCell = document.createElement("td");
-    firstNameCell.textContent = firstName;
-    Row.appendChild(firstNameCell);
-
-    var lastNameCell = document.createElement("td");
-    lastNameCell.textContent = lastName;
-    Row.appendChild(lastNameCell);
-
-    var GenderCell = document.createElement("td");
-    GenderCell.textContent = Gender;
-    Row.appendChild(GenderCell);
-
-    var EmailCell = document.createElement("td");
-    EmailCell.textContent = Email;
-    Row.appendChild(EmailCell);
-
-    var HobbiesCell = document.createElement("td");
-    HobbiesCell.textContent = Hobbies;
-    Row.appendChild(HobbiesCell);
-
-    var action = document.createElement("td");
-
-    var edit = document.createElement("button");
-    edit.textContent = "Edit";
-    edit.onclick = function(){
-        document.getElementsById("firstName").value = firstName;
-        document.getElementsById("lastName").value = lastName;
-        document.getElementsById("Gender").value = Gender;
-        document.getElementsById("Email").value = Email;
-        document.getElementsById("Hobbies").value = Hobbies;
-
-        table.removeChild(Row);    
-    };
-
-    var deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    deleteButton.onclick = function(){
-        table.removeChild(Row);
-    };
-
-    action.appendChild(edit);
-    action.appendChild(deleteButton);
-    Row.appendChild(action);
-
-    table.appendChild(Row);
-
-    form.reset();
-   
-}
+var str1 = "bged fgbg hbgce fgbg fgbg lmno abcd hbgce";
+console.log(str1.)
