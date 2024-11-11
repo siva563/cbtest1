@@ -276,8 +276,32 @@
 // mydiv=document.getElementById('chandu');
 // mydiv.appendChild(_table);
 
-// 
+// function repeate(str1){
+//     var b=0;
+//      var g=0;
+//      for(const char of str1){
+//         if(char==='b'){
+//              b+=1;
+//          }
+//         else if(char==='g'){
+//              g+=1;
+//         }
+//      }
+//     return{b:b,g:g};
+//  }
+//  var str1 = "bged fgbg hbgce fgbg fgbg lmno abcd hbgce";
+//  var result = repeate(str1);
+// console.log("count of 'b' and 'g'",result);
 
+// var str2 = "codebegun,";
+// var str3 ="codebegun in hyderabad";
+// var str4=str2.concat(str3);
+// console.log(str4);
 
-var str1 = "bged fgbg hbgce fgbg fgbg lmno abcd hbgce";
-console.log(str1.)
+// var marks = [100,23,45,65,88,99,32];
+// var sum = 0;
+// for(var val of marks){
+//     sum+=val;
+// }
+// var avg = sum/marks.length;
+// console.log(avg);
