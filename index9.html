@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Table with Filters</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: auto;
+            text-align: left;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #filter-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        select, input {
+            margin: 5px;
+            padding: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">To-Do List</h1>
+
+    <!-- Filters -->
+    <div id="filter-container">
+        <label>User ID: </label>
+        <select id="userFilter">
+            <option value="all">All</option>
+        </select>
+
+        <label>ID: </label>
+        <input type="text" id="idFilter" placeholder="Enter ID">
+
+        <label>Title: </label>
+        <input type="text" id="titleFilter" placeholder="Enter Title">
+
+        <label>Completed: </label>
+        <select id="completedFilter">
+            <option value="all">All</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+    </div>
+
+    <!-- Table Output -->
+    <div id="output"></div>
+
+    <script>
+        var mydata = [];
+
+        // Fetch the data from API
+        function getData() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://jsonplaceholder.typicode.com/todos", true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    mydata = JSON.parse(xhr.responseText);
+                    populateUserDropdown();
+                    createTable(mydata); // Display all data initially
+                }
+            };
+            xhr.send();
+        }
+
+        // Populate User ID Dropdown
+        function populateUserDropdown() {
+            var dropdown = document.getElementById("userFilter");
+            var userIds = [];
+            for (var i = 0; i < mydata.length; i++) {
+                if (!userIds.includes(mydata[i].userId)) {
+                    userIds.push(mydata[i].userId);
+                }
+            }
+            for (var j = 0; j < userIds.length; j++) {
+                var option = document.createElement("option");
+                option.value = userIds[j];
+                option.textContent = userIds[j];
+                dropdown.appendChild(option);
+            }
+        }
+
+        // Create the table
+        function createTable(data) {
+            var output = document.getElementById("output");
+            output.innerHTML = ""; // Clear previous data
+
+            var table = document.createElement("table");
+
+            // Table headers
+            var headers = ["User ID", "ID", "Title", "Completed"];
+            var headerRow = document.createElement("tr");
+            for (var i = 0; i < headers.length; i++) {
+                var th = document.createElement("th");
+                th.textContent = headers[i];
+                headerRow.appendChild(th);
+            }
+            table.appendChild(headerRow);
+
+            // Table rows
+            for (var i = 0; i < data.length; i++) {
+                var row = document.createElement("tr");
+
+                var userIdCell = document.createElement("td");
+                userIdCell.textContent = data[i].userId;
+                row.appendChild(userIdCell);
+
+                var idCell = document.createElement("td");
+                idCell.textContent = data[i].id;
+                row.appendChild(idCell);
+
+                var titleCell = document.createElement("td");
+                titleCell.textContent = data[i].title;
+                row.appendChild(titleCell);
+
+                var completedCell = document.createElement("td");
+                completedCell.textContent = data[i].completed ? "Yes" : "No";
+                row.appendChild(completedCell);
+
+                table.appendChild(row);
+            }
+
+            output.appendChild(table);
+        }
+
+        // Apply Filters
+        function applyFilters() {
+            var filteredData = mydata;
+
+            // Filter by User ID
+            var userFilter = document.getElementById("userFilter").value;
+            if (userFilter !== "all") {
+                filteredData = filteredData.filter(function (item) {
+                    return item.userId == userFilter;
+                });
+            }
+
+            // Filter by ID
+            var idFilter = document.getElementById("idFilter").value;
+            if (idFilter !== "") {
+                filteredData = filteredData.filter(function (item) {
+                    return item.id.toString().includes(idFilter);
+                });
+            }
+
+            // Filter by Title
+            var titleFilter = document.getElementById("titleFilter").value.toLowerCase();
+            if (titleFilter !== "") {
+                filteredData = filteredData.filter(function (item) {
+                    return item.title.toLowerCase().includes(titleFilter);
+                });
+            }
+
+            // Filter by Completed
+            var completedFilter = document.getElementById("completedFilter").value;
+            if (completedFilter !== "all") {
+                filteredData = filteredData.filter(function (item) {
+                    return item.completed.toString() === completedFilter;
+                });
+            }
+
+            createTable(filteredData); // Display filtered data
+        }
+
+        // Add Event Listeners for Filters
+        document.getElementById("userFilter").addEventListener("change", applyFilters);
+        document.getElementById("idFilter").addEventListener("input", applyFilters);
+        document.getElementById("titleFilter").addEventListener("input", applyFilters);
+        document.getElementById("completedFilter").addEventListener("change", applyFilters);
+
+        // Fetch data on page load
+        getData();
+    </script>
+</body>
+</html>
