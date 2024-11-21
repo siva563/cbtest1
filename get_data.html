@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dynamic Table with Multiple Filters</title>
+    <title>Basic Table with Filters</title>
     <style>
         table {
             border-collapse: collapse;
@@ -20,164 +20,161 @@
             text-align: center;
             margin-bottom: 20px;
         }
-        select, input[type="text"], input[type="radio"] {
+        select, input {
+            margin: 5px;
             padding: 5px;
-            font-size: 16px;
-            margin-right: 10px;
-        }
-        .checkbox {
-            display: flex;
-            align-items: center;
-        }
-        .checkbox span {
-            margin-left: 5px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <h1 id="myh1tags">To-Do List</h1>
-    
-    <!-- Filter Container -->
+    <h1 style="text-align: center;">To-Do List</h1>
+
+    <!-- Filters -->
     <div id="filter-container">
-        <label for="userFilter">Filter by User ID: </label>
+        <label>User ID: </label>
         <select id="userFilter">
             <option value="all">All</option>
         </select>
 
-        <label for="idFilter">Filter by ID: </label>
-        <input type="text" id="idFilter" placeholder="Enter ID" />
+        <label>ID: </label>
+        <input type="text" id="idFilter" placeholder="Enter ID">
 
-        <label for="titleFilter">Filter by Title: </label>
-        <input type="text" id="titleFilter" placeholder="Enter Title" />
+        <label>Title: </label>
+        <input type="text" id="titleFilter" placeholder="Enter Title">
 
-        <label for="completedFilter">Completed: </label>
-        <input type="radio" name="completed" id="completedTrue" value="true" /> Yes
-        <input type="radio" name="completed" id="completedFalse" value="false" /> No
-        <input type="radio" name="completed" id="completedAll" value="all" checked /> All
+        <label>Completed: </label>
+        <select id="completedFilter">
+            <option value="all">All</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
     </div>
-    
+
+    <!-- Table Output -->
     <div id="output"></div>
 
     <script>
-        let mydata;
+        var mydata = [];
 
-        // Fetch data from API
+        // Fetch the data from API
         function getData() {
-            fetch("https://jsonplaceholder.typicode.com/todos")
-                .then(response => response.json())
-                .then(data => {
-                    mydata = data;
-                    populateDropdown();
-                    createTable(); // Show all data initially
-                })
-                .catch(error => console.error("Error fetching data:", error));
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://jsonplaceholder.typicode.com/todos", true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    mydata = JSON.parse(xhr.responseText);
+                    populateUserDropdown();
+                    createTable(mydata); // Display all data initially
+                }
+            };
+            xhr.send();
         }
 
-        // Populate dropdown with unique user IDs
-        function populateDropdown() {
-            const dropdown = document.getElementById("userFilter");
-            const userIds = [...new Set(mydata.map(item => item.userId))]; // Unique user IDs
-            userIds.forEach(userId => {
-                const option = document.createElement("option");
-                option.value = userId;
-                option.textContent = userId;
+        // Populate User ID Dropdown
+        function populateUserDropdown() {
+            var dropdown = document.getElementById("userFilter");
+            var userIds = [];
+            for (var i = 0; i < mydata.length; i++) {
+                if (!userIds.includes(mydata[i].userId)) {
+                    userIds.push(mydata[i].userId);
+                }
+            }
+            for (var j = 0; j < userIds.length; j++) {
+                var option = document.createElement("option");
+                option.value = userIds[j];
+                option.textContent = userIds[j];
                 dropdown.appendChild(option);
-            });
-
-            // Add event listeners for filters
-            document.getElementById("userFilter").addEventListener("change", applyFilters);
-            document.getElementById("idFilter").addEventListener("input", applyFilters);
-            document.getElementById("titleFilter").addEventListener("input", applyFilters);
-            document.getElementsByName("completed").forEach(radio => {
-                radio.addEventListener("change", applyFilters);
-            });
+            }
         }
 
-        // Create table based on filters
-        function createTable(filteredData = mydata) {
-            const output = document.getElementById("output");
-            output.innerHTML = ""; // Clear previous table
+        // Create the table
+        function createTable(data) {
+            var output = document.getElementById("output");
+            output.innerHTML = ""; // Clear previous data
 
-            const table = document.createElement("table");
-            const headerRow = document.createElement("tr");
-            const headers = ["User ID", "ID", "Title", "Completed"];
-            headers.forEach(headerText => {
-                const th = document.createElement("th");
-                th.textContent = headerText;
+            var table = document.createElement("table");
+
+            // Table headers
+            var headers = ["User ID", "ID", "Title", "Completed"];
+            var headerRow = document.createElement("tr");
+            for (var i = 0; i < headers.length; i++) {
+                var th = document.createElement("th");
+                th.textContent = headers[i];
                 headerRow.appendChild(th);
-            });
+            }
             table.appendChild(headerRow);
 
-            // Populate rows
-            filteredData.forEach(item => {
-                const row = document.createElement("tr");
+            // Table rows
+            for (var i = 0; i < data.length; i++) {
+                var row = document.createElement("tr");
 
-                const userIdCell = document.createElement("td");
-                userIdCell.textContent = item.userId;
+                var userIdCell = document.createElement("td");
+                userIdCell.textContent = data[i].userId;
                 row.appendChild(userIdCell);
 
-                const idCell = document.createElement("td");
-                idCell.textContent = item.id;
+                var idCell = document.createElement("td");
+                idCell.textContent = data[i].id;
                 row.appendChild(idCell);
 
-                const titleCell = document.createElement("td");
-                titleCell.textContent = item.title;
+                var titleCell = document.createElement("td");
+                titleCell.textContent = data[i].title;
                 row.appendChild(titleCell);
 
-                const completedCell = document.createElement("td");
-                const checkbox = document.createElement("input");
-                checkbox.type = "checkbox";
-                checkbox.disabled = true;
-                checkbox.checked = item.completed;
-
-                const checkboxLabel = document.createElement("span");
-                checkboxLabel.textContent = item.completed ? "✔" : "✖";
-
-                const checkboxWrapper = document.createElement("div");
-                checkboxWrapper.classList.add("checkbox");
-                checkboxWrapper.appendChild(checkbox);
-                checkboxWrapper.appendChild(checkboxLabel);
-
-                completedCell.appendChild(checkboxWrapper);
+                var completedCell = document.createElement("td");
+                completedCell.textContent = data[i].completed ? "Yes" : "No";
                 row.appendChild(completedCell);
 
                 table.appendChild(row);
-            });
+            }
 
             output.appendChild(table);
         }
 
-        // Apply all filters
+        // Apply Filters
         function applyFilters() {
-            let filteredData = mydata;
+            var filteredData = mydata;
 
-            // Filter by user ID
-            const userFilter = document.getElementById("userFilter").value;
+            // Filter by User ID
+            var userFilter = document.getElementById("userFilter").value;
             if (userFilter !== "all") {
-                filteredData = filteredData.filter(item => item.userId == userFilter);
+                filteredData = filteredData.filter(function (item) {
+                    return item.userId == userFilter;
+                });
             }
 
             // Filter by ID
-            const idFilter = document.getElementById("idFilter").value.trim();
-            if (idFilter) {
-                filteredData = filteredData.filter(item => item.id.toString().includes(idFilter));
+            var idFilter = document.getElementById("idFilter").value;
+            if (idFilter !== "") {
+                filteredData = filteredData.filter(function (item) {
+                    return item.id.toString().includes(idFilter);
+                });
             }
 
             // Filter by Title
-            const titleFilter = document.getElementById("titleFilter").value.trim().toLowerCase();
-            if (titleFilter) {
-                filteredData = filteredData.filter(item => item.title.toLowerCase().includes(titleFilter));
+            var titleFilter = document.getElementById("titleFilter").value.toLowerCase();
+            if (titleFilter !== "") {
+                filteredData = filteredData.filter(function (item) {
+                    return item.title.toLowerCase().includes(titleFilter);
+                });
             }
 
             // Filter by Completed
-            const completedFilter = document.querySelector('input[name="completed"]:checked').value;
+            var completedFilter = document.getElementById("completedFilter").value;
             if (completedFilter !== "all") {
-                const isCompleted = completedFilter === "true";
-                filteredData = filteredData.filter(item => item.completed === isCompleted);
+                filteredData = filteredData.filter(function (item) {
+                    return item.completed.toString() === completedFilter;
+                });
             }
 
-            createTable(filteredData);
+            createTable(filteredData); // Display filtered data
         }
+
+        // Add Event Listeners for Filters
+        document.getElementById("userFilter").addEventListener("change", applyFilters);
+        document.getElementById("idFilter").addEventListener("input", applyFilters);
+        document.getElementById("titleFilter").addEventListener("input", applyFilters);
+        document.getElementById("completedFilter").addEventListener("change", applyFilters);
 
         // Fetch data on page load
         getData();
