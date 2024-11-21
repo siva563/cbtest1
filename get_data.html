@@ -59,16 +59,16 @@
 
         // Fetch the data from API
         function getData() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "https://jsonplaceholder.typicode.com/todos", true);
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    mydata = JSON.parse(xhr.responseText);
+            var x = new XMLHttpRequest();
+            x.open("GET", "https://jsonplaceholder.typicode.com/todos", true);
+            x.onload = function () {
+                if (x.status === 200) {
+                    mydata = JSON.parse(x.responseText);
                     populateUserDropdown();
                     createTable(mydata); // Display all data initially
                 }
             };
-            xhr.send();
+            x.send();
         }
 
         // Populate User ID Dropdown
