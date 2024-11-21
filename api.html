@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Table with Filter</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: auto;
+            text-align: left;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #filter-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        select {
+            padding: 5px;
+            font-size: 16px;
+        }
+        .checkbox {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox span {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="myh1tags">To-Do List</h1>
+    
+    <!-- Filter Dropdown -->
+    <div id="filter-container">
+        <label for="userFilter">Filter by User ID: </label>
+        <select id="userFilter">
+            <option value="all">All</option>
+        </select>
+    </div>
+    
+    <div id="output"></div>
+
+    <script>
+        var mydata;
+
+        function getData() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.response);
+                    mydata = JSON.parse(this.response);
+                    populateDropdown();
+                    createTable("all"); // Show all data initially
+                }
+            }
+            xhttp.open("GET", "https://jsonplaceholder.typicode.com/todos", true);
+            xhttp.send();
+        }
+
+        function populateDropdown() {
+            var dropdown = document.getElementById("userFilter");
+            var userIds = [...new Set(mydata.map(item => item.userId))]; // Unique user IDs
+            userIds.forEach(userId => {
+                var option = document.createElement("option");
+                option.value = userId;
+                option.textContent = userId;
+                dropdown.appendChild(option);
+            });
+
+            // Add event listener for dropdown change
+            dropdown.addEventListener("change", function () {
+                createTable(this.value);
+            });
+        }
+
+        function createTable(filterUserId) {
+            var output = document.getElementById("output");
+            output.innerHTML = ""; // Clear previous table
+
+            // Create a table element
+            var table = document.createElement("table");
+
+            // Create the header row
+            var headerRow = document.createElement("tr");
+            var headers = ["User ID", "ID", "Title", "Completed"];
+            headers.forEach(headerText => {
+                var th = document.createElement("th");
+                th.textContent = headerText;
+                headerRow.appendChild(th);
+            });
+            table.appendChild(headerRow);
+
+            // Filter data based on selected userId
+            var filteredData = filterUserId === "all" 
+                ? mydata 
+                : mydata.filter(item => item.userId == filterUserId);
+
+            // Populate the table rows
+            filteredData.forEach(item => {
+                var row = document.createElement("tr");
+
+                // User ID Column
+                var userIdCell = document.createElement("td");
+                userIdCell.textContent = item.userId;
+                row.appendChild(userIdCell);
+
+                // ID Column
+                var idCell = document.createElement("td");
+                idCell.textContent = item.id;
+                row.appendChild(idCell);
+
+                // Title Column
+                var titleCell = document.createElement("td");
+                titleCell.textContent = item.title;
+                row.appendChild(titleCell);
+
+                // Completed Column with Checkbox
+                var completedCell = document.createElement("td");
+                var checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.disabled = true; // Disable interaction
+                checkbox.checked = item.completed; // Check if `completed` is true
+
+                var checkboxLabel = document.createElement("span");
+                checkboxLabel.textContent = item.completed ? "✔" : "✖"; // Add a checkmark or cross symbol
+
+                var checkboxWrapper = document.createElement("div");
+                checkboxWrapper.classList.add("checkbox");
+                checkboxWrapper.appendChild(checkbox);
+                checkboxWrapper.appendChild(checkboxLabel);
+
+                completedCell.appendChild(checkboxWrapper);
+                row.appendChild(completedCell);
+
+                table.appendChild(row);
+            });
+
+            // Append the table to the output div
+            output.appendChild(table);
+        }
+
+        // Call the function to get data
+        getData();
+    </script>
+</body>
+</html>

@@ -291,7 +291,22 @@ console.log(formatphonenumebrs([1,2,3,4,5,6,7,8,9,0]));
 
 var ascendingOrder=numbers=>numbers.sort((a,b)=>a.length-b.length);
 console.log(ascendingOrder(["a","ccc","bb","dddd"]));
-
+/*
 document.onkeydown=function(event){
     console.log(`key pressed: ${event.key}`);
+}
+/*
+function onkeypress(event){
+    console.log(`key pressed: ${event.key}`);
+}
+/*
+document.onkeyup=function(event){
+    console.log(`key pressed: ${event.key}`);
+}*/
+
+document.onblur = function(event) {
+    console.log("The document lost focus!");
+};
+document.onfocus=function(event){
+    console.log("hello guys focus");
 }
