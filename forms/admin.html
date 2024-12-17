@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f9; }
+        h2, h3 { text-align: center; }
+        table { width: 100%; margin: auto; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #4CAF50; color: white; }
+        input { margin: 5px; padding: 8px; width: 150px; }
+        button { padding: 8px 10px; margin: 5px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <center><h2>Admin Dashboard</h2></center>
+    <table id="adminTable">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h3>Edit User</h3>
+    <div id="editForm" style="display: none;">
+        <input id="editFname" placeholder="First Name">
+        <input id="editLname" placeholder="Last Name">
+        <input id="editMobile" placeholder="Mobile">
+        <input id="editEmail" placeholder="Email" disabled>
+        <input id="editRole" placeholder="Role">
+        <button onclick="saveEdit()">Save Changes</button>
+    </div>
+
+    <script>
+        // Retrieve users from localStorage
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+
+        // Display users in the table
+        function displayUsers() {
+            const table = document.querySelector('#adminTable tbody');
+            table.innerHTML = '';
+
+            users.forEach((user, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.firstname}</td>
+                    <td>${user.lastname}</td>
+                    <td>${user.mobile}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role}</td>
+                    <td>
+                        <button onclick="editUser(${index})">Edit</button>
+                    </td>
+                `;
+                table.appendChild(row);
+            });
+        }
+
+        // Function to edit user
+        function editUser(index) {
+            const user = users[index];
+            document.getElementById('editFname').value = user.firstname;
+            document.getElementById('editLname').value = user.lastname;
+            document.getElementById('editMobile').value = user.mobile;
+            document.getElementById('editEmail').value = user.email;
+            document.getElementById('editRole').value = user.role;
+
+            // Show edit form
+            document.getElementById('editForm').style.display = 'block';
+
+            // Store the user index for saving later
+            document.getElementById('editForm').setAttribute('data-index', index);
+        }
+
+        // Function to save the edited user details
+        function saveEdit() {
+            const index = document.getElementById('editForm').getAttribute('data-index');
+            const user = users[index];
+
+            // Get the updated values
+            user.firstname = document.getElementById('editFname').value;
+            user.lastname = document.getElementById('editLname').value;
+            user.mobile = document.getElementById('editMobile').value;
+            user.role = document.getElementById('editRole').value;
+
+            // Update in localStorage
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Refresh the table
+            displayUsers();
+
+            // Hide the edit form
+            document.getElementById('editForm').style.display = 'none';
+        }
+
+        // Display users on page load
+        displayUsers();
+    </script>
+</body>
+</html>

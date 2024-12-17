@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; }
+        h2 { text-align: center; }
+        table { width: 70%; margin: auto; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        button { display: block; margin: 20px auto; padding: 10px 15px; background: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <center><h2>Welcome to Your Dashboard</h2></center>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody id="userData"></tbody>
+    </table>
+    <button onclick="logout()">Logout</button>
+
+    <script>
+        // Get user details
+        const allUsers = JSON.parse(localStorage.getItem('users')) || [];
+        const loggedInEmail = localStorage.getItem('loggedInUser');
+        const userData = allUsers.find(user => user.email === loggedInEmail);
+
+        // Display the user data
+        const tableBody = document.getElementById('userData');
+        if (userData) {
+            tableBody.innerHTML = `
+                <tr>
+                    <td>${userData.firstname}</td>
+                    <td>${userData.lastname}</td>
+                    <td>${userData.mobile}</td>
+                    <td>${userData.email}</td>
+                    <td>${userData.role}</td>
+                </tr>
+            `;
+        } else {
+            tableBody.innerHTML = '<tr><td colspan="5">No user data found</td></tr>';
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

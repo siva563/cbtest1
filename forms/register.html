@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #message {
+            margin-top: 15px;
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <center><h2>Registration Page</h2></center>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" placeholder="Enter First Name" required>
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last Name:</label>
+                <input type="text" id="lastname" placeholder="Enter Last Name" required>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile" placeholder="Enter Mobile Number" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter Email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter Password" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select id="role" required>
+                    <option value="user">User</option>
+                    <option value="moderator">Moderator</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        // JavaScript to handle form submission and LocalStorage
+        document.getElementById('registrationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form values
+            const firstname = document.getElementById('firstname').value.trim();
+            const lastname = document.getElementById('lastname').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const role = document.getElementById('role').value;
+
+            // Create a user object
+            const user = {
+                firstname,
+                lastname,
+                mobile,
+                email,
+                password,
+                role
+            };
+
+            // Retrieve any existing users from LocalStorage
+            let users = localStorage.getItem('users');
+            if (users) {
+                users = JSON.parse(users);
+            } else {
+                users = [];
+            }
+
+            // Add the new user
+            users.push(user);
+
+            // Save back to LocalStorage
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Clear the form
+            document.getElementById('registrationForm').reset();
+
+            // Redirect to login page
+            alert('Registration successful! Redirecting to login page...');
+            window.location.href = 'login.html'; // Redirect to login page
+        });
+    </script>
+</body>
+</html>

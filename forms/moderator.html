@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderator Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f9; }
+        table { width: 90%; margin: auto; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        th { background-color: #4CAF50; color: white; }
+        input { padding: 5px; width: 90%; }
+        button { padding: 5px 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+   <center><h2>Moderator Dashboard</h2></center>
+    <table id="usersTable">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+
+        // Function to display users (only user role, hide admin)
+        function displayUsers() {
+            const table = document.querySelector('#usersTable tbody');
+            table.innerHTML = ''; // Clear the table
+
+            users.forEach((user, index) => {
+                if (user.role !== 'admin') { // Only show users, hide admin
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${user.firstname}</td>
+                        <td>${user.lastname}</td>
+                        <td><input type="text" value="${user.mobile}" id="mobile-${index}" /></td>
+                        <td>${user.email}</td>
+                        <td>${user.role}</td>
+                        <td>
+                            <button onclick="updateMobile(${index})">Update Mobile</button>
+                        </td>
+                    `;
+                    table.appendChild(row);
+                }
+            });
+        }
+
+        // Function to update the mobile number
+        function updateMobile(index) {
+            const newMobile = document.getElementById(`mobile-${index}`).value;
+            if (newMobile.trim() === "") {
+                alert("Mobile number cannot be empty!");
+                return;
+            }
+
+            // Update the user's mobile number in the users array
+            users[index].mobile = newMobile;
+
+            // Save updated users back to localStorage
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Refresh the table
+            displayUsers();
+
+            alert("Mobile number updated successfully!");
+        }
+
+        // Call the displayUsers function when the page loads
+        displayUsers();
+    </script>
+</body>
+</html>
